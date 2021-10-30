@@ -4,28 +4,47 @@ import { FSM } from './fsm';
 import { useFSM } from './hooks/use-fsm';
 
 const fsm = new FSM({
-  initialState: "off",
+  initialState: {
+    toggle:'off',
+    state2:'red'
+  },
   states: {
-    off: {
-      transitions: {
-        TOGGLE: "on"
-      }
-    },
-    on: {
-      transitions: {
-        TOGGLE: "off"
-      }
+    toggle:{
+      on: {
+        nextState: "blink"
+      },
+      blink: {
+        nextState: "off"
+      },
+     off:{
+        nextState:'on'
     }
+  },
+  state2:{
+    blue: {
+      nextState: "red"
+    },
+    red: {
+      nextState: "blue"
+    },
+  }
   }
 });
 
-const Switch = withFSM(fsm)(({fsmInstance})=>{
+
+
+const SwitchInner = ({fsmInstance})=>{
+  const {toggle,state2} = fsmInstance.getState()
   return(
   <>
-  <button onClick={() => fsmInstance.transition("TOGGLE")}>toggle</button>
-  <div>State is: {fsmInstance.getState()}</div>
+  <button onClick={() => fsmInstance.transition("toggle")}>toggle</button>
+  <button onClick={() => fsmInstance.transition("state2")}>toggle</button>
+  <div>State is: {toggle}</div>
+  <div>State is: {state2}</div>
   </>)
-})
+}
+
+const Switch = withFSM(fsm)(SwitchInner)
 
 const App = () => {
   // const { state, error, transition } = useFSM(fsm);

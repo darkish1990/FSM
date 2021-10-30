@@ -10,11 +10,10 @@ export class FSM {
   }
 
   transition(transitionName){
-    console.log(this.state);
-    const nextState = this.states[this.state]?.transitions?.[transitionName]
+    const nextState = this.states[transitionName][this.state[transitionName]].nextState
     //check if the state has a transition with said name 
     if(nextState){
-      this.state = nextState
+      this.state[transitionName] = nextState
       this.transitionSubsrcibers.forEach((transitionFunction)=>transitionFunction(this.state))
       this.error = ''
       this.errorSubscribers.forEach((errorFunction)=>errorFunction(this.error))
@@ -22,10 +21,6 @@ export class FSM {
       this.error = `Error Can't transition ${this.state} to ${transitionName}`
       this.errorSubscribers.forEach((errorFunction)=>errorFunction(this.error))
     }
-  }
-  
-  kaka(){
-    return 'kaka'
   }
 
   getState(){
