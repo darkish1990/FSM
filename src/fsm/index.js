@@ -6,6 +6,7 @@ export class FSM {
   errorSubscribers = new Set();
   constructor({initialState, states}){
     this.state = initialState;
+    this.initialState = initialState
     this.states = states;
   }
 
@@ -43,7 +44,6 @@ export class FSM {
   subscribe(onTransition, onError){
     this.transitionSubsrcibers.add((onTransition))
     onError && this.errorSubscribers.add((onError))
-    return ()=> this.unsubscribe(onTransition, onError)
   }
   unsubscribe(onTransition, onError){
     this.transitionSubsrcibers.delete((onTransition))

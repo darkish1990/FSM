@@ -8,8 +8,7 @@ import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css"; //Example style, you can use another
 
 const Input = ({ parsingError,fsm,clickHandler }) => {
-  const [code, setCode] = useState(JSON.stringify(fsm,undefined,2)) 
-
+   const [code, setCode] = useState(JSON.stringify(fsm.states,undefined,2))
     return (
         
         <Container>

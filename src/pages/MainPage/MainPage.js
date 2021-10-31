@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { FSM } from '../../fsm';
 import { useFSM } from '../../fsm/fsm-react';
 import Input from '../../components/Input/Input'
@@ -10,53 +10,42 @@ const initalFsm = {
   states: {
     up: {
       transitions: {
-        TOGGLE: "right",
+        RIGHT: "right",
       }
     },
     right: {
       transitions: {
-        TOGGLE: "down"
+        DOWN: "down"
       }
     },
     down: {
       transitions: {
-        TOGGLE: "left"
+        LEFT: "left"
       }
     },
     left: {
       transitions: {
-        TOGGLE: "up"
+        UP: "up"
       }
     },
     }
   };
 
-  const checkValidationForJsonObj=(jsonObj)=>{
-    if (!jsonObj.initialState) {
-        return false
-   }
-  //  for (const iterator in jsonObj.states) {
-  //    console.log(iterator);
-  //   if (!iterator.transitions) {
-  //     return false
-  //   }
-  //  }
-   
-      return true
-  }
-
 const MainPage = () => {
-    const [fsm, setFSM] = useState(initalFsm)
-    const { state, error, transition } = useFSM(new FSM(fsm));
-    console.log(state);
+    const [fsm, setFSM] = useState(()=>new FSM(initalFsm))
+    const [actionsStack, setActionsStack] = useState([])
+    const { state, transition } = useFSM(fsm);
     const [parsingError, setParsingError] = useState(null)
     const clickHandler=(code)=>{
         try {
-            const parsedCode = JSON.parse(code);
-            if (!checkValidationForJsonObj(parsedCode)) {
-              setParsingError('code is not a valid')
-                }
-                setFSM(parsedCode)
+            const parsedJson = JSON.parse(code);
+                setFSM(prev => {
+                  const newFSMOptions = {
+                    ...prev,
+                    states: parsedJson
+                  };
+                  return new FSM(newFSMOptions);
+                })
         } catch (e) {
             setParsingError(e);
         }
@@ -65,7 +54,7 @@ const MainPage = () => {
     return (
         <OuterContainer>
             <LeftContainer><Input parsingError={parsingError} fsm={fsm} clickHandler={clickHandler}/></LeftContainer>
-            <RightContainer><Output transition={transition} fsm={fsm} state={state}/></RightContainer>
+            <RightContainer><Output transition={transition} fsm={fsm} state={state} actionsStack={actionsStack} setActionsStack={setActionsStack}/></RightContainer>
         </OuterContainer>
     )
 }

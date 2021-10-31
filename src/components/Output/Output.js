@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Button, Container, DropDownButton, DropDownContainer, DropDownContent } from './StyledOutput';
 
-const Output = ({transition,fsm,state}) => {
+const Output = ({transition,fsm,state,actionsStack,setActionsStack}) => {
     const possibilities = fsm?.states[state]?.transitions
-    const mappedPossibilities = Object.entries(possibilities)
+    const mappedPossibilities = Object.keys(possibilities)
     const [dropDownHovered, setDropDownHovered] = useState(false)
     return (
         <Container>
@@ -11,7 +11,7 @@ const Output = ({transition,fsm,state}) => {
             <DropDownButton>selectNextState</DropDownButton>
                  {dropDownHovered&& <DropDownContent class="dropdown-content">
                       {possibilities && mappedPossibilities.map((posibility)=>{
-                            return<Button onClick={()=>{transition(posibility[0])}}>{posibility[0]}</Button>
+                            return<Button onClick={()=>{transition(posibility)}}>{posibility}</Button>
                         })}
                  </DropDownContent>
                 }
