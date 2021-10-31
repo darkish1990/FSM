@@ -7,8 +7,8 @@ import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css"; //Example style, you can use another
 
-const Input = ({ parsingError,fsm,clickHandler }) => {
-   const [code, setCode] = useState(JSON.stringify(fsm.states,undefined,2))
+const Input = ({ parsingError,filteredFsm,clickHandler }) => {
+   const [code, setCode] = useState(JSON.stringify(filteredFsm,undefined,2))
     return (
         
         <Container>

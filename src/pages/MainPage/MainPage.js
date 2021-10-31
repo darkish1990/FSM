@@ -6,46 +6,43 @@ import Output from '../../components/Output/Output'
 import { LeftContainer, OuterContainer, RightContainer } from './StyledMainPage'
 
 const initalFsm = {
-    initialState: "up",
-  states: {
-    up: {
-      transitions: {
-        RIGHT: "right",
+    "initialState": "up",
+    "states": {
+    "up": {
+      "transitions": {
+        "RIGHT": "right",
       }
     },
-    right: {
-      transitions: {
-        DOWN: "down"
+    "right": {
+      "transitions": {
+        "DOWN": "down"
       }
     },
-    down: {
-      transitions: {
-        LEFT: "left"
+    "down": {
+      "transitions": {
+        "LEFT": "left"
       }
     },
-    left: {
-      transitions: {
-        UP: "up"
+    "left": {
+      "transitions": {
+        "UP": "up"
       }
-    },
+    }
     }
   };
 
 const MainPage = () => {
     const [fsm, setFSM] = useState(()=>new FSM(initalFsm))
     const [actionsStack, setActionsStack] = useState([])
-    const { state, transition } = useFSM(fsm);
+    const { state:fsmState, transition } = useFSM(fsm);
+    const{state,error,errorSubscribers,transitionSubsrcibers,...filteredFsm} = fsm
     const [parsingError, setParsingError] = useState(null)
     const clickHandler=(code)=>{
         try {
             const parsedJson = JSON.parse(code);
-                setFSM(prev => {
-                  const newFSMOptions = {
-                    ...prev,
-                    states: parsedJson
-                  };
-                  return new FSM(newFSMOptions);
-                })
+                setFSM(
+                   new FSM(parsedJson)
+                )
         } catch (e) {
             setParsingError(e);
         }
@@ -53,8 +50,8 @@ const MainPage = () => {
 
     return (
         <OuterContainer>
-            <LeftContainer><Input parsingError={parsingError} fsm={fsm} clickHandler={clickHandler}/></LeftContainer>
-            <RightContainer><Output transition={transition} fsm={fsm} state={state} actionsStack={actionsStack} setActionsStack={setActionsStack}/></RightContainer>
+            <LeftContainer><Input parsingError={parsingError} filteredFsm={filteredFsm} clickHandler={clickHandler}/></LeftContainer>
+            <RightContainer><Output transition={transition} filteredFsm={filteredFsm} state={fsmState} actionsStack={actionsStack} setActionsStack={setActionsStack}/></RightContainer>
         </OuterContainer>
     )
 }

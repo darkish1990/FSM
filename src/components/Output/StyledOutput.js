@@ -1,6 +1,16 @@
 import styled from 'styled-components'
 
 export const DropDownContainer = styled.div`
+height: 60px;
+width: 160px;
+overflow: auto;
+`
+export const ActionStackContainer = styled.div`
+overflow: auto;
+`
+export const StackContainer = styled.div`
+display: flex;
+
 `
 export const Container = styled.div`
   height: 100%;
@@ -9,6 +19,8 @@ export const Container = styled.div`
 export const DropDownContent = styled.div`
   display: flex;
   flex-direction: column;
+  max-height: 100px;
+  overflow: auto;
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
@@ -19,13 +31,14 @@ export const DropDownContent = styled.div`
 
 export const DropDownButton = styled.button`
   color: white;
+  height: 50px;
   padding: 16px;
   font-size: 16px;
   border: none;
   background-color: grey;
 `
 export const Button = styled.button`
-  height: 30px;
+  min-height: 30px;
   width: 100%;
   font-weight: 600;
   background-color: white;
