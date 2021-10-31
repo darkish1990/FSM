@@ -6,6 +6,7 @@ export const useFSM=(fsm)=>{
 
     const onTransition = useCallback(
         (nextState) => {
+      
             setState(nextState)
         },
         [],

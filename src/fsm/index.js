@@ -9,19 +9,26 @@ export class FSM {
     this.states = states;
   }
 
-  transition(transitionName){
-    const nextState = this.states[transitionName][this.state[transitionName]].nextState
-    //check if the state has a transition with said name 
-    if(nextState){
-      this.state[transitionName] = nextState
-      this.transitionSubsrcibers.forEach((transitionFunction)=>transitionFunction(this.state))
-      this.error = ''
-      this.errorSubscribers.forEach((errorFunction)=>errorFunction(this.error))
-    }else{
-      this.error = `Error Can't transition ${this.state} to ${transitionName}`
-      this.errorSubscribers.forEach((errorFunction)=>errorFunction(this.error))
+  transition(transitionName) {
+    const nextState = this.states[this.state]?.transitions?.[transitionName];
+    //check if the state has a transition with said name
+    if (nextState) {
+      this.state = nextState;
+      this.transitionSubsrcibers.forEach((transitionFunction) =>
+        transitionFunction(this.state)
+      );
+      this.error = "";
+      this.errorSubscribers.forEach((errorFunction) =>
+        errorFunction(this.error)
+      );
+    } else {
+      this.error = `Error Can't transition ${this.state} to ${transitionName}`;
+      this.errorSubscribers.forEach((errorFunction) =>
+        errorFunction(this.error)
+      );
     }
   }
+
 
   getState(){
     return this.state
