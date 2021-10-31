@@ -1,7 +1,7 @@
-import MainPage from './pages/MainPage/MainPage';
+import MainPage from "./pages/MainPage/MainPage";
 
-const App=()=> {
-  return <MainPage/>
-}
+const App = () => {
+  return <MainPage />;
+};
 
 export default App;

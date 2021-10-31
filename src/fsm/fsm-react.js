@@ -1,42 +1,35 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect } from "react";
 
-export const useFSM=(fsm)=>{
-    const [state, setState] = useState(fsm.getState())
-    const [error, setError] = useState(fsm.getError())
+export const useFSM = (fsm) => {
+  const [state, setState] = useState(fsm.getState());
+  const [error, setError] = useState(fsm.getError());
 
-    const onTransition = useCallback(
-        (nextState) => {
-      
-            setState(nextState)
-        },
-        [],
-    )
-    const onError = useCallback(
-        (error) => {
-            setError(error)
-        },
-        [],
-    )
+  const onTransition = useCallback((nextState) => {
+    setState(nextState);
+  }, []);
+  const onError = useCallback((error) => {
+    setError(error);
+  }, []);
 
-    useEffect(() => {
-        fsm.subscribe(onTransition,onError)
-        return () => {
-            fsm.unsubscribe(onTransition,onError)
-        }
-    }, [fsm,onTransition,onError])
+  useEffect(() => {
+    fsm.subscribe(onTransition, onError);
+    return () => {
+      fsm.unsubscribe(onTransition, onError);
+    };
+  }, [fsm, onTransition, onError]);
 
-    useEffect(() => {
-        if(fsm.getState()!== state){
-            setState(fsm.getState())
-        }
-    }, [fsm,state])
+  useEffect(() => {
+    if (fsm.getState() !== state) {
+      setState(fsm.getState());
+    }
+  }, [fsm, state]);
 
-    const transition =useCallback(
-        (transitionName) => {
-            fsm.transition(transitionName)
-        },
-        [fsm],
-    )
+  const transition = useCallback(
+    (transitionName) => {
+      fsm.transition(transitionName);
+    },
+    [fsm]
+  );
 
-    return {state, error, transition}
-}
+  return { state, error, transition };
+};

@@ -1,21 +1,20 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const DropDownContainer = styled.div`
-height: 60px;
-width: 160px;
-overflow: auto;
-`
+  height: 60px;
+  width: 160px;
+  overflow: auto;
+`;
 export const ActionStackContainer = styled.div`
-overflow: auto;
-`
+  overflow: auto;
+`;
 export const StackContainer = styled.div`
-display: flex;
-
-`
+  display: flex;
+`;
 export const Container = styled.div`
   height: 100%;
   width: 100%;
-`
+`;
 export const DropDownContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,10 +23,10 @@ export const DropDownContent = styled.div`
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   background-color: #ddd;
-`
+`;
 
 export const DropDownButton = styled.button`
   color: white;
@@ -36,7 +35,7 @@ export const DropDownButton = styled.button`
   font-size: 16px;
   border: none;
   background-color: grey;
-`
+`;
 export const Button = styled.button`
   min-height: 30px;
   width: 100%;
@@ -45,16 +44,9 @@ export const Button = styled.button`
   border: none;
   color: grey;
   transition: 0.3s;
-  &:hover{
-      background-color: grey;
-      color: white;
-      opacity: 0.8;
+  &:hover {
+    background-color: grey;
+    color: white;
+    opacity: 0.8;
   }
-`
-
-
-
-
-
-
-
+`;

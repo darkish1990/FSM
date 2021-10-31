@@ -4,9 +4,9 @@ export class FSM {
   states;
   transitionSubsrcibers = new Set();
   errorSubscribers = new Set();
-  constructor({initialState, states}){
+  constructor({ initialState, states }) {
     this.state = initialState;
-    this.initialState = initialState
+    this.initialState = initialState;
     this.states = states;
   }
 
@@ -30,24 +30,22 @@ export class FSM {
     }
   }
 
-
-  getState(){
-    return this.state
+  getState() {
+    return this.state;
   }
 
-  getError(){
-    if(this.error){
-      return this.error
+  getError() {
+    if (this.error) {
+      return this.error;
     }
   }
 
-  subscribe(onTransition, onError){
-    this.transitionSubsrcibers.add((onTransition))
-    onError && this.errorSubscribers.add((onError))
+  subscribe(onTransition, onError) {
+    this.transitionSubsrcibers.add(onTransition);
+    onError && this.errorSubscribers.add(onError);
   }
-  unsubscribe(onTransition, onError){
-    this.transitionSubsrcibers.delete((onTransition))
-    onError && this.errorSubscribers.delete((onError))
+  unsubscribe(onTransition, onError) {
+    this.transitionSubsrcibers.delete(onTransition);
+    onError && this.errorSubscribers.delete(onError);
   }
-
 }
