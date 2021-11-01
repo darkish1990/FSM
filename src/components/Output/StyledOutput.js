@@ -27,7 +27,7 @@ export const Container = styled.div`
 export const DropDownContent = styled.div`
   display: flex;
   flex-direction: column;
-  max-height: 100px;
+  max-height: 120px;
   overflow: auto;
   position: absolute;
   background-color: #f1f1f1;

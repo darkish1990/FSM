@@ -60,8 +60,8 @@ const Output = ({
             <StackContainer key={index}>
               {index}. Current state : {state.toUpperCase()} ====&gt; Next
               possible states :[
-              {Object.keys(nextPossibleState).toString()}] ====&gt; Selected:{" "}
-              {selected};
+              {Object.keys(nextPossibleState).toString()}] ====&gt; Selected
+              State : {selected}
             </StackContainer>
           );
         })}
