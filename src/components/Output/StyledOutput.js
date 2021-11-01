@@ -1,15 +1,24 @@
 import styled from "styled-components";
 
+const DROPDOWN_CONTAINER_HEIGHT = "120px";
+
 export const DropDownContainer = styled.div`
-  height: 60px;
+  height: ${DROPDOWN_CONTAINER_HEIGHT};
   width: 160px;
   overflow: auto;
 `;
 export const ActionStackContainer = styled.div`
   overflow: auto;
+  max-height: calc(100% - ${DROPDOWN_CONTAINER_HEIGHT});
 `;
 export const StackContainer = styled.div`
   display: flex;
+  align-items: center;
+  border-bottom: 1px solid black;
+  background-color: whitesmoke;
+  color: grey;
+  height: 50px;
+  font-weight: 800;
 `;
 export const Container = styled.div`
   height: 100%;

@@ -8,47 +8,18 @@ import {
   OuterContainer,
   RightContainer,
 } from "./StyledMainPage";
-
-const initalFsm = {
-  initialState: "up",
-  states: {
-    up: {
-      transitions: {
-        RIGHT: "right",
-      },
-    },
-    right: {
-      transitions: {
-        DOWN: "down",
-      },
-    },
-    down: {
-      transitions: {
-        LEFT: "left",
-      },
-    },
-    left: {
-      transitions: {
-        UP: "up",
-      },
-    },
-  },
-};
+import { getFilteredFsm, initalFsm, schema } from "../../utils/utils";
 
 const MainPage = () => {
   const [fsm, setFSM] = useState(() => new FSM(initalFsm));
   const [actionsStack, setActionsStack] = useState([]);
   const { state: fsmState, transition } = useFSM(fsm);
-  const {
-    state,
-    error,
-    errorSubscribers,
-    transitionSubsrcibers,
-    ...filteredFsm
-  } = fsm;
+  const filteredFsm = getFilteredFsm(fsm);
   const [parsingError, setParsingError] = useState(null);
   const clickHandler = (code) => {
+    setParsingError(null);
     try {
+      schema.validate(code);
       const parsedJson = JSON.parse(code);
       setFSM(new FSM(parsedJson));
     } catch (e) {

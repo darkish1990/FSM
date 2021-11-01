@@ -18,8 +18,8 @@ const Output = ({
 }) => {
   const possibilities = filteredFsm?.states[state]?.transitions;
   const mappedPossibilities = Object.keys(possibilities);
-  console.log({ mappedPossibilities });
   const [dropDownHovered, setDropDownHovered] = useState(false);
+
   return (
     <Container>
       <DropDownContainer onMouseLeave={() => setDropDownHovered(false)}>
@@ -58,8 +58,10 @@ const Output = ({
           const { state, nextPossibleState, selected } = item;
           return (
             <StackContainer key={index}>
-              current state : {state.toUpperCase()} next possible states :[
-              {Object.keys(nextPossibleState).toString()}] selected: {selected}
+              {index}. Current state : {state.toUpperCase()} ====&gt; Next
+              possible states :[
+              {Object.keys(nextPossibleState).toString()}] ====&gt; Selected:{" "}
+              {selected};
             </StackContainer>
           );
         })}
