@@ -38,7 +38,7 @@ export const schema = Joi.object({
       ),
     })
   ),
-}).options({ convert: false });
+}).options({ convert: false});
 
 export const getFilteredFsm = (fsm) => {
   const {

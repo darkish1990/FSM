@@ -17,7 +17,7 @@ const Output = ({
   setActionsStack,
 }) => {
   const possibilities = filteredFsm?.states[state]?.transitions;
-  const mappedPossibilities = Object.keys(possibilities);
+  const mappedPossibilities = Object.keys(possibilities || []);
   const [dropDownHovered, setDropDownHovered] = useState(false);
 
   return (

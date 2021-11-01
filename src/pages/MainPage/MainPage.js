@@ -19,9 +19,15 @@ const MainPage = () => {
   const clickHandler = (code) => {
     setParsingError(null);
     try {
-      schema.validate(code);
       const parsedJson = JSON.parse(code);
-      setFSM(new FSM(parsedJson));
+      const validatedJson = schema.validate(parsedJson, {
+        presence: "required",
+      });
+      if (!validatedJson.error) {
+        setFSM(new FSM(parsedJson));
+      } else {
+        setParsingError(validatedJson.error);
+      }
     } catch (e) {
       setParsingError(e);
     }

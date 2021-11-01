@@ -36,7 +36,8 @@ const Input = ({ parsingError, filteredFsm, clickHandler }) => {
 
       {parsingError && (
         <ErrorMsg>
-          This is not a valid schema please reffer to the default json
+          This is not a valid schema please reffer to the default json. the
+          playground hasn't changed previous fsm.
         </ErrorMsg>
       )}
       <Editor
