@@ -18,12 +18,6 @@ export const useFSM = (fsm) => {
     };
   }, [fsm, onTransition, onError]);
 
-  useEffect(() => {
-    if (fsm.getState() !== state) {
-      setState(fsm.getState());
-    }
-  }, [fsm, state]);
-
   const transition = useCallback(
     (transitionName) => {
       fsm.transition(transitionName);
