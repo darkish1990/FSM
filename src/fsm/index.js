@@ -12,7 +12,6 @@ export class FSM {
 
   transition(transitionName) {
     const nextState = this.states[this.state]?.transitions?.[transitionName];
-    //check if the state has a transition with said name
     if (nextState) {
       this.state = nextState;
       this.transitionSubsrcibers.forEach((transitionFunction) =>
