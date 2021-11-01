@@ -6,7 +6,6 @@ export class FSM {
   errorSubscribers = new Set();
   constructor({ initialState, states }) {
     this.state = initialState;
-    this.initialState = initialState;
     this.states = states;
   }
 
